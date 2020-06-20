@@ -41,7 +41,7 @@ DB_PORT = os.getenv('DB_PORT')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
