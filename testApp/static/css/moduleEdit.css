@@ -1,0 +1,623 @@
+/* Variables for consistancy in design */
+:root {
+    /* Variables containing colors for the website */
+    --main-color: #17a2b8;  
+    --secondary-color: #fff; /* white */
+    --border-color: #fff; /* white */
+    --text-color: black;    /* black */
+    --button-text-color: #fff;
+    --main-hover-color: #138496;
+
+    --button-border-radius: 10px;
+    --main-font: Poppins-Medium;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+.viewAndCreateReaction {
+    display: flex;
+    flex-direction: row;
+    float: center;
+    height: 650px;
+}
+
+.wrap-login100 {
+    width: 1000px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 100px;
+    background: #9152f8;
+    background: -webkit-linear-gradient(top, #19384A, #347787);
+    background: -o-linear-gradient(top, #19384A, #347787);
+    background: -moz-linear-gradient(top, #19384A, #347787);
+    background: linear-gradient(top, #19384A, #347787);
+    align-content: center;
+}
+
+#subsContainer,
+#prodsContainer,
+#enzsContainer {
+    width: auto;
+    display: block;
+    height: 30.855%;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#prodsLabel,
+#enzsLabel,
+#subsLabel {
+    display: inline-block;
+    font-size: 25px;
+    color: rgb(25, 25, 25);
+    margin-left: 1%;
+    border-bottom: 2px solid;
+    border-bottom-color: var(--text-color);
+}
+
+.subs,
+.enzs,
+.prods {
+    width: 100%;
+    padding-left: 1%;
+}
+
+ul#products {
+    overflow-y: scroll;
+    color: var(--secondary-color);
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    max-height: 120px;
+}
+
+ul#enzymes {
+    overflow-y: scroll;
+    color: var(--secondary-color);
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    max-height: 120px;
+}
+
+ul#substrates {
+    overflow-y: scroll;
+    color: var(--secondary-color);
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    max-height: 120px;
+}
+
+.container {
+    float: left;
+    clear: none;
+    color: rgb(25, 25, 25);
+    display: block;
+    padding: .5% 1% 0 0;
+}
+
+/* Centering for the group of reversible/irreversible buttons */
+#reversibleButtons {
+    display: flex;
+    text-align: center;
+}
+
+#irreversibleButton {
+    width: 100%;
+    background-color: var(--main-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    color: var(--secondary-color);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 2% 2% 2% 2%;
+    text-align: center;
+    margin-top: 1%;
+}
+
+#reversibleButton {
+    width: 100%;
+    background-color: var(--main-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    color: var(--secondary-color);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 2% 2% 2% 2%;
+    text-align: center;
+    margin-top: 1%;
+}
+
+/* Create reaction button */
+.createReaction {
+    display: block;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--main-color); /* Green */
+    color: var(--secondary-color);
+    text-align: center;
+    font-size: 16px;
+}
+
+/*  Clear reaction button */
+.clearReaction {
+    display: block;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--main-color); /* Green */
+    color: var(--secondary-color);
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Save reaction button */
+.saveReaction {
+    display: block;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--main-color); /* Green */
+    color: var(--secondary-color);
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Back button */
+.backBtn {
+    display: block;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--main-color); /* Green */
+    color: var(--secondary-color);
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Change button color on hover */
+.saveReaction:hover, 
+.clearReaction:hover,
+.createReaction:hover,
+.backBtn:hover,
+#reversibleButton:hover,
+#irreversibleButton:hover {
+    background-color: var(--main-hover-color);
+}
+
+.editToolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0% 5%;
+}
+
+.innerToolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+/*Change color of choices in tool bar*/
+
+.editToolbarButton {
+    color: var(--secondary-color);
+    padding: 5%;
+}
+
+
+/*Add white section above the rectangles */
+
+#imageCanvas {
+    background-color: var(--secondary-color);
+    width: 100%;
+    height: 650px;
+}
+
+.imageCanvasDiv{
+    display: inline-block ;
+    width: 850px;
+    height: 655px;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* var(--text-color) w/ opacity */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#snackbar,
+#snackbarHelp,
+#snackbarSaveBtn {
+    visibility: hidden;
+    /* Hidden by default. Visible on click */
+    min-width: 100%;
+    /* Set a default minimum width */
+    margin: auto;
+    background-color: #333;
+    color: var(--secondary-color);
+    /* var(--secondary-color) text color */
+    text-align: center;
+    /* Centered text */
+    border-radius: 2px;
+    /* Rounded borders */
+    padding: 16px;
+    /* Padding */
+    position: fixed;
+    /* Sit on top of the screen */
+    z-index: 1;
+    /* Add a z-index if needed */
+    bottom: 30px;
+    /* 30px from the bottom */
+}
+
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+
+#snackbar.show,
+#snackbarSaveBtn.show {
+    visibility: visible;
+    /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 4.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+    animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+#snackbarHelp.show {
+    visibility: visible;
+    /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 6.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 6.5s;
+    animation: fadein 0.5s, fadeout 0.5s 6.5s;
+}
+
+
+/* Animations to fade the snackbar in and out */
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+/*
+    Hamburger menu CSS attributes
+*/
+
+.flex-sliders {
+    display: inline-block;
+    /* flex-direction: column;
+    float: left; */
+    height: 650px;
+    margin-left: 1%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 5px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.9);
+    border-radius: 1%;
+    overflow-y: scroll;
+}
+
+#slider-holder {
+    width: 389.84px;
+}
+
+/******
+    Style page content - use this if you want to push the page content 
+    to the right when you open the side navigation 
+******/
+
+/*
+    Hide the options button that opens the sidebar when in desktop mode
+*/
+#open-sidebar {
+    display: none;
+}
+
+/* 
+    Hide the close button for the slide-out menu when in desktop mode 
+*/
+.sidebar .closebtn {
+    display: none;
+}
+
+ /* 
+    Style the button that is used to open and close the collapsible content 
+*/
+ .collapsible-button {
+    display: block;
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    height: 45px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-left: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.5);
+    font-size: 15px;
+}
+
+.collapsible-button:hover {
+    background-color: rgb(199, 198, 198);
+}
+
+/* 
+    Style the collapsible content. Note: hidden by default 
+*/
+.collapsible-content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px;
+}
+
+/*
+    Signifiers for each of the collapsible buttons that change from "+" to "-"
+*/
+#collapsible-signifier-substrate,
+#collapsible-signifier-enzyme,
+#collapsible-signifier-product {
+    font-size: 13px;
+    color: var(--text-color);
+    float: right;
+    margin-left: 5px;
+}
+
+/* 
+    [Mobile] - Screen size less than 576px 
+*/
+@media screen and (max-width: 767.98px) {
+    #imageCanvas {
+        height: 80vh;
+        width: 90vw;
+    }
+
+    /* Hide labels inside the checkbox menu */
+    #prodsLabel,
+    #enzsLabel,
+    #subsLabel {
+        display: none;
+    }
+
+    /* Style the button that is used to open and close the collapsible content */
+    .collapsible-button {
+        display: block;
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
+    /* Style the collapsible content. Note: hidden by default */
+    .collapsible-content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /*
+        Canvas size in mobile mode
+    */
+    .imageCanvasDiv {
+        width: 90vw;
+        height: 80vh;
+    }
+
+    #imageCanvas {
+        background-color: var(--secondary-color);
+        float: none;
+        display: inline-block;
+    }
+
+    /*
+        Options button appears when screen size is mobile sized
+    */
+    #open-sidebar {
+        display: block;
+    }
+  
+    /* The sidebar menu */
+    .sidebar {
+        height: 100%;
+        /* 100% Full-height */
+        width: 0;
+        /* 0 width - change this with JavaScript */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Stay on top */
+        top: 0;
+        right: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        transition: 0.5s;
+        /* 0.5 second transition effect to slide in the sidebar */
+    }
+    /* The sidebar links */
+    .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+    /* When you mouse over the navigation links, change their color */
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+    /* Position and style the close button (top right corner) */
+    .sidebar .closebtn { 
+        top: 0;
+        font-size: 36px;
+        display: block;
+        text-align: center;
+    }
+    /* The button used to open the sidebar */
+    .openbtn {
+        cursor: pointer;
+        font-family: Poppins-Medium;
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+ 
+    }
+
+    /* Options buttons changes color when hovered over */
+    .openbtn:hover {
+        background-color: #ccc;
+    }
+
+    /* Styling for the play-pause button */
+    .play-pause {
+        border: 1px solid var(--secondary-color);
+        background-color: var(--main-color);
+        height: 57.8px;
+        margin-top: 4%;
+        float: left;
+        color: var(--secondary-color);
+        width: 100%;
+        padding: 1.2% 1.2% 1.2% 1.2%;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    #slider-holder {
+        width: 100%;
+    }
+
+    #modelEditCanvas {
+        width: 100vw;
+    }
+    #modelEditDiv {
+        width: 90vw;
+        height: 70vh;
+        overflow-x:hidden;
+    }
+    .flex-horiz{
+        min-width: 80vw;
+        height: 70vh;
+    }
+}
+

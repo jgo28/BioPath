@@ -1,0 +1,34 @@
+{% extends 'indexLogged.html' %}
+{% load static %}
+
+{% block adminDeleteModel %}
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <!--===============================================================================================-->
+    
+    <div class="container-background">
+        <form method ="post" class="deleteUserForm" action="#" onsubmit="return confirm('Are you sure you want to delete the selected pathways permanently?\n(This is ireversible!)');">
+            {% csrf_token %}
+            <!-- Display users in an HTML table -->
+            <div id="table-container">
+                <table id="model-table">
+                    <tr>
+                        <th class="arrow" onclick="sortTable('name', 'model-table');changeArrowIndicator(this)">Models: {{ modelList|length }}</th>
+                    </tr>
+                    {% for model in modelList %}
+                        <tr> 
+                            <td>
+                                <label class="container" id="{{model.modelName}}">
+                                    <input type="checkbox" value="{{model.id}}" name="Model" className="{{model.modelName}}">
+                                    {{model.modelName}}  
+                                </label>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <button type="submit" class="btn btn-danger" id="sign-up-button">Delete Models</button>
+        </form>
+    </div>
+    <script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

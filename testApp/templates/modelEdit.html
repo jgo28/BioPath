@@ -1,0 +1,77 @@
+﻿{% extends 'indexLogged.html' %} 
+{% block modelEdit %} 
+{% load static %}
+
+</head>
+
+<body>
+    <img class="substrateImage" id="substr" src="{% static 'images/substrate.png' %}" style="display: none;">
+    <!-- Button to activate options sidebar-->
+    <div id="open-sidebar">
+        <button class="openbtn" onclick="openNav()">&#9776; Options</button>
+    </div>
+    <div class="login100-form-modelEdit validate-form">
+        {{ modules|json_script:"db-modules" }} 
+        {{ substrates|json_script:"db-substrates" }} 
+        {{ products|json_script:"db-products" }} 
+        {{ model_num|json_script:"modelNum"}} 
+        {{ xCoorNext|json_script:"x-coor-next" }} 
+        {{ yCoorNext|json_script:"y-coor-next" }} 
+        {{ pubModel|json_script:"pubModel"}}
+        <div class="flex-horiz">
+            <div class="web-title-spacer"></div>
+            <div id="modelEditDiv">
+                <canvas id="modelEditCanvas" height="650" width="800" onclick="playPauseCanvas()"></canvas>
+            </div>
+            <!-- Options sidebar -->
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                <div class="flex-sliders" id="slider-holder">
+                    <!-- Create New Reaction button created here with id="new-reaction" -->
+                    <form method="post" action="#">
+                    {% csrf_token %}
+                        <div class="modelButtons">
+                            <button type="button" class="ctrl-btn model-ctrl-btn" id="play-pause">Pause</button>
+                            <button type="button" class="ctrl-btn new-reaction-btn" id="new-reaction">Create New Reaction</button>
+                            <button type="submit" name="deleteModel" class="ctrl-btn clear-model-btn" id="clearModelButton">Clear Model</button>
+                        </div>
+                    </form> 
+                    <h3 class="varLabel">Variables</h3>
+                </div>
+            </div>
+            <div class="web-title-spacer"></div>
+        </div>
+    </div>
+
+    <!-- Help popup -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <p>On this screen you can view the molecules flowing through the pathway!</p>
+                <br>
+                <p>- Click the pause/play button or the canvas to stop/start the flow.</p>
+                <p>- To start over a pathway, click the CLEAR MODEL button.</p>
+                <p>- Move the sliders to change the speed of the elements in the flow.</p>
+                <p>- Only <b>irreversible reactions</b> have sliders. </p>
+                <p>- Click the button in the variables section below the enzyme's name to view/edit that enzyme.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script src="{% static 'js/modelEdit.js' %}"></script>
+    <script src="{% static 'js/utilities.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

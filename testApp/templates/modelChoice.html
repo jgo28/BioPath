@@ -1,0 +1,72 @@
+{% extends 'indexLogged.html' %}
+
+{% block modelChoice %}
+
+<div class="row">
+	{% if perms.catalog.add_model %}
+	<!-- Admin tools card -->
+	<div class="col-md">	
+		<a href="/testApp/adminTools">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Admin Tools</h5>
+					<div class="card-text">Utilize various admin tools.</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	{% endif %}
+</div>
+<!-- Student models card -->
+<div class="row">
+	<div class="col-md">	
+		<a href="/testApp/studentModels">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Student Models</h5>
+					<div class="card-text">Build a pathway.</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+<!-- Teacher models card -->
+<div class="row">
+	<div class="col-md">
+		<a href="/testApp/teacherModels">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Teacher Models</h5>
+					<div class="card-text">View a finished pathway.</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<p>
+				Student models are incomplete pathways that students can build. 
+				The goal is to be able to correctly build an entire pathway.
+			</p>
+			<br>
+		  	<p>
+				Teacher models contain completed versions of a pathway that can be viewed.
+			  </p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+		</div>
+	  </div>
+	</div>
+</div>
+{% endblock %}

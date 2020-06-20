@@ -1,0 +1,155 @@
+<!-- This page allows an instructor to add an individual reaction to the database-->
+{% extends 'indexLogged.html' %}
+
+{% block addModel %}
+{% load static %}
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{% static 'css/addModel.css' %}">
+<!--===============================================================================================-->
+
+<!-- Import the database information through django
+    allsubs is from views.py-->
+<script>
+    var encodedJSONModel = '{{modeltoedit}}';
+
+    var allPaths = []
+    {% for path in allpaths %}
+    allPaths.push('{{path.name}}');
+    {% endfor %}
+
+    var allSubs = [];  
+    {% for subs in allsubs %}
+    allSubs.push(['{{subs.substrate}}', '{{subs.abbr}}']);
+    {% endfor %}
+
+    var allEnzys = [];  
+    {% for enzys in allenzys %}
+    allEnzys.push(['{{enzys.enzyme}}', '{{enzys.enzymeAbbr}}']);
+    {% endfor %}
+
+    var allProds = [];  
+    {% for prods in allprods %}
+    allProds.push(['{{prods.product}}', '{{prods.abbr}}']);
+    {% endfor %}
+
+    var allPaths = [];
+    {% for paths in allpaths %}
+    allPaths.push('{{paths.modelName}}'); //just want list of names
+    {% endfor %}
+</script>
+
+<div class="add-reaction-div"> <!--wrap-signup100-->
+    <!-- displays information about the model -->
+    <div id='model_info_div'>
+        <p>Pathway Name: </p>
+        <!--all max length restrictions come from the database-->
+        <input id='input_model_name' maxlength="200">
+        <p id='number_of_reactions'></p>
+    </div>
+    <hr>
+    <!-- shows the currently completed reactions -->
+    <div id='previous_reaction_div'>
+        <p id='previous_reactions'> Previous Reactions: <br/> </p>
+        <table style='max-width: 100%' id='previous_reactions_table'>
+            <tr>
+                <th>𝐑𝐄𝐀𝐂𝐓𝐈𝐎𝐍 𝐍𝐔𝐌𝐁𝐄𝐑 </th>
+                <th>Substrate(s) </th>
+                <th>Enzyme </th>
+                <th>Product(s) </th>
+                <th>Reversible</th>
+                <th>Options </th>
+            </tr>
+        </table>
+    </div>
+    <hr>
+
+    <!-- shows the fields needed to add info the the current reaction -->
+    <div id='current_reaction_div'>
+        <div id='choose_substrates_div'>
+            <h3 id='edit_reaction_header' class='header3-text'></h3>
+            <label id='substrates_label' class='label-text'>Select Substrates</label>
+            <button id='add_another_substrate_btn', onclick='addAnotherSubstrate()' class='text-btn'>➕ add</button>
+            <button id='remove_substrate_btn', onclick='removeSubstrate()' class='text-btn'>➖ remove </button>
+            <!--Button to open Modal-->
+            <button id = 'add_new_substrate_btn' class='text-btn'>➕ create new</button>
+            <!--The Modal-->
+            <div id = 'modal_add_substrate' class='modal-add'>
+                <!--Modal content-->
+                <div class='modal-content-add'>
+                    <span class='close'>&times;</span>
+                    <p>Name of Substrate: </p>
+                    <input class='input' type="text" id='new_substrate_name' maxlength="200">
+                    <p>Abbreviation of Substrate: </p>
+                    <input class='input' type="text" id='new_substrate_abbr' maxlength="8">
+                    <p>Image: Feature not yet available</p>
+                    <button id='save_new_substrate' class='login100-form-btn' onclick='saveSubstrate()'>Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Enzymes-->
+        <div id='choose_enzyme_div'>
+            <label id='enzyme_label' class='label-text'>Select Enzyme</label>
+            <select id='select_enzyme'>
+                <!--<option value='you_forgot'>Epstein didn't kill himself</option>-->
+            </select>
+            <input type='checkbox' id='reversible_checkbox'><label for="reversible_checkbox" style="float:left; margin-right:10px">Reversible</label>
+             <!--Button to open Modal-->
+             <button id = 'add_new_enzyme_btn' class='text-btn'>➕ create new</button>
+             <!--The Modal-->
+             <div id = 'modal_add_enzyme' class='modal-add'>
+                 <!--Modal content-->
+                 <div class='modal-content-add'>
+                     <span class='close'>&times;</span>
+                     <p>Name of Enzyme: </p>
+                     <input class='input' type="text" id='new_enzyme_name' maxlength="200">
+                     <p>Abbreviation of Enzyme: </p>
+                     <input class='input' type="text" id='new_enzyme_abbr' maxlength="8">
+                     <p>Image: Feature not yet available</p>
+                     <button id='save_new_enzyme' class='login100-form-btn' onclick='saveEnzyme()'>Save</button>
+                 </div>
+             </div> <br>
+        </div>
+
+        <!--Products-->
+        <div id='choose_products_div'>
+            <label id='products_label' class='label-text'>Select Products</label>
+            <button id='add_another_product_btn' onclick='addAnotherProduct()' class='text-btn'>➕ add</button>
+            <button id='remove_product_btn', onclick='removeProduct()' class='text-btn'>➖ remove </button>
+            <!--Button to open Modal-->
+            <button id = 'add_new_product_btn' class='text-btn'>➕ create new</button>
+            <!--The Modal-->
+            <div id = 'modal_add_product' class='modal-add'>
+                <!--Modal content-->
+                <div class='modal-content-add'>
+                    <span class='close'>&times;</span>
+                    <p>Name of Product: </p>
+                    <input class='input' type="text" id='new_product_name' maxlength="200">
+                    <p>Abbreviation of Product: </p>
+                    <input class='input' type="text" id='new_product_abbr' maxlength="8">
+                    <p>Image: Feature not yet available</p>
+                    <button id='save_new_product' class='login100-form-btn' onclick='saveProduct()'>Save</button>
+                </div>
+            </div>
+        </div>        
+        <button id='add_reaction_to_model_btn', class='add-reaction-btn' onclick='addReaction()'>Add Reaction</button>
+        <button id='save_edited_reaction_btn', class='add-reaction-btn' onclick='saveReaction()' style='display:none'>Save Reaction</button>
+    </div>
+    <hr>
+    <!-- button for adding the finished pathway to the database -->
+    <div id='add_pathway_div'>
+        <!-- if isValidForm returns true, send the post request -->
+        <form method='POST' onsubmit="return isValidForm()">
+            {% csrf_token %}
+            <!--we used the same css style class that is used for login buttons-->
+            <button class="login100-form-btn" name="pathwayData" type="submit" id="login-button" style='display: none' onclick="submitPathway()">Add Pathway</button>
+            <!--We have the below two inputs in order to send data to views.py to write to database-->
+            <input id='model_name_input', name='model_name_input', style='display: none'>
+            <input id='number_reactions_input', name='number_reactions_input', style='display: none'>
+        </form>
+    </div>
+
+</div>
+<script src="{% static 'js/addModel.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'indexLogged.html' %}
+{% load static %}
+
+{% block adminDeleteUser %}
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <!--===============================================================================================-->
+
+    <div class="container-background">
+        <form method ="post" class="deleteUserForm" action="#" onsubmit="return confirm('Are you sure you want to delete the selected users perminately?\n(This is ireversible!)');">
+            {% csrf_token %}
+            <!-- Display users in an HTML table -->
+            <div id="table-container">
+                <table id="user-table">
+                    <tr>
+                        <th class="arrow" onclick="sortTable('name', 'user-table');changeArrowIndicator(this);">
+                            Users: {{ users|length }}
+                        </th>
+                        <th class="arrow" onclick="sortTable('date', 'user-table');changeArrowIndicator(this);">Last Login:</th>
+                    </tr>
+                    {% for user in users %}
+                        <tr> 
+                            <td>
+                                <!-- Label tag makes entire container with the username clickable -->
+                                <label>
+                                    <input type="checkbox" value="{{user.id}}" name="User">
+                                    {{user.username}}
+                                </label>
+                            </td>   
+                            <td>  
+                                {{user.last_login}}
+                            </td> 
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <button type="submit" class="btn btn-danger" id="sign-up-button">Delete User</button>
+        </form>
+    </div>
+    <script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

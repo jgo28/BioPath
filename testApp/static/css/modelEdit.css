@@ -1,0 +1,471 @@
+/* Variables for consistancy in design */
+:root {
+    /* Variables containing colors for the website */
+    --main-color: #17a2b8;  
+    --secondary-color: #fff; /* white */
+    --border-color: #fff; /* white */
+    --text-color: black;    /* black */
+    --button-text-color: #fff;
+    --main-hover-color: #138496;
+
+    --button-border-radius: 10px;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: Poppins-Medium;
+    src: url('../fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../fonts/poppins/Poppins-SemiBold.ttf');
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: Poppins-Regular, sans-serif;
+    color: var(--text-color);
+}
+
+
+/*---------------------------------------------*/
+
+a {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+
+/*---------------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0px;
+}
+
+p {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0px;
+}
+
+ul,
+li {
+    margin: 0px;
+    list-style-type: none;
+}
+
+
+/*---------------------------------------------*/
+
+input {
+    outline: none;
+    border: none;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus:-moz-placeholder {
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+input::-webkit-input-placeholder {
+    color: var(--secondary-color);
+}
+
+input:-moz-placeholder {
+    color: var(--secondary-color);
+}
+
+input::-moz-placeholder {
+    color: var(--secondary-color);
+}
+
+input:-ms-input-placeholder {
+    color: var(--secondary-color);
+}
+
+label {
+    margin: 0;
+    display: block;
+}
+
+
+/*---------------------------------------------*/
+
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+iframe {
+    border: none !important;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Utility ]*/
+
+.txt1 {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #e5e5e5;
+    line-height: 1.5;
+}
+
+.slider-label {
+    color: var(--text-color);
+}
+
+.modelButtons {
+    display: flex;
+    flex-flow: column;
+    height: auto;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.flex-horiz {
+    display: flex;
+    flex-direction: row;
+    float: center;
+    min-width: 1000px;
+    height: 650px;
+}
+
+.flex-sliders {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    height: 650px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.9);
+    overflow-y: auto;
+    border-radius: 1px;
+}
+    
+/* Container for all the sliders */
+#slider-holder {
+    width: 389.84px;
+}
+
+/* Appearance of a slider */
+.slider-appearance {
+    width: 100%;
+    /* height: 25px; */
+    background: #d3d3d3;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+/* Appearance of the variable names */
+.variable-holder {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    min-width: 240px;
+}
+
+/* Appearance of the number next to sliders */
+.variable-value-appearance {
+    color: var(--text-color);
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    min-width: 3vw;
+}
+
+.varLabel {
+    padding: 5px 0px 0px 10px;
+}
+
+.inner-flex-horiz {
+    display: flex;
+    float: left;
+    flex-direction: row;
+}
+
+.edit-button {
+    display: flex;
+    height: 100%;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    background-color: var(--main-color); /* Green */
+    padding: 5px;
+    margin-left: 5%;
+    border-radius: var(--button-border-radius);
+}
+
+.edit-button:hover {
+    background-color: var(--main-hover-color);
+}
+
+/* 
+    Modified Bootstrap btn class. 
+    Styling that applies to all buttons.
+*/
+.ctrl-btn {
+    display: inline-block;
+    min-height: 5vh;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: 0.25rem;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Buttons for controlling the pathway */
+.model-ctrl-btn {
+    color: var(--button-text-color);
+    background-color: var(--main-color);
+    border-color: var(--border-color);
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.model-ctrl-btn:hover {
+    background-color: var(--main-hover-color);
+}
+
+.clear-model-btn {
+    color: var(--button-text-color);
+    background-color: #dc3545;
+    border-color: var(--border-color);
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.clear-model-btn:hover {
+    background-color: #c82333;
+}
+
+.new-reaction-btn {
+    color: var(--button-text-color);
+    background-color: #28a745;
+    border-color: var(--border-color);
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.new-reaction-btn:hover {
+    background-color: #218838;
+}
+
+/*------------------------------------------------------------------
+[ Form ]*/
+
+#modelEditCanvas {
+    background-color: var(--secondary-color);
+    opacity: 0.85;
+    width: 100%;
+}
+
+#modelEditDiv {
+    width: 800px;
+    height: 650px;
+    overflow: auto;
+
+}
+
+.hamburger-container {
+    display: none;
+}
+
+
+/* 
+    Style page content - use this if you want to push the page content 
+    to the right when you open the side navigation 
+*/
+
+#open-sidebar {
+    display: none;
+    /* transition: margin-right .5s; */
+    /* padding: 20px; */
+}
+
+.sidebar .closebtn {
+    display: none;
+}
+
+
+/* [Mobile] - Screen size less than 767.98px */
+
+@media screen and (max-width: 767.98px) {
+
+
+    /* 
+        Modified Bootstrap btn class. 
+        Styling that applies to all buttons.
+    */
+    .ctrl-btn {
+        min-height: 10vh;
+    }
+
+    #open-sidebar {
+        display: block;
+    }
+  
+    /* The sidebar menu */
+    .sidebar {
+        height: 100%;
+        /* 100% Full-height */
+        width: 0;
+        /* 0 width - change this with JavaScript */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Stay on top */
+        top: 0;
+        right: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        transition: 0.5s;
+        /* 0.5 second transition effect to slide in the sidebar */
+    }
+    /* The sidebar links */
+    .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        /* font-size: 25px; */
+        /* font-family: 'Times New Roman'; */
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+    /* When you mouse over the navigation links, change their color */
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+    /* Position and style the close button (top right corner) */
+    .sidebar .closebtn { 
+        top: 0px;
+        /* Push button down 60px to move away from underneath navbar */
+        margin-top: 60px;   
+        font-size: 36px;
+        display: block;
+        text-align: center;
+    }
+    
+    /* The button used to open the sidebar */
+    .openbtn {
+        display: block;
+        cursor: pointer;
+        font-family: Poppins-Medium;
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .openbtn:hover {
+        background-color: #ccc;
+    }
+
+    /* General styling for buttons for controlling the pathway on a canvas */
+    .model-ctrl-btn {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    /* Container for the variable sliders */
+    #slider-holder {
+        width: 100%;
+    }
+
+    #modelEditCanvas {
+        width: 100vw;
+    }
+    #modelEditDiv {
+        width: 90vw;
+        height: 70vh;
+        overflow-x:hidden;
+    }
+    .flex-horiz{
+        min-width: 80vw;
+        height: 70vh;
+    }
+
+    .flex-sliders{
+        border:none;
+        overflow-y:none;
+        height:auto;
+    }
+}
+

@@ -1,0 +1,114 @@
+/*
+    CSS for the admin functionality pages
+*/
+
+/* Variables for consistancy in design */
+:root {
+    /* Variables containing colors for the website */
+    --main-color: #4CAF50;  /* Green */
+    --secondary-color: #fff; /* white */
+    --border-color: #fff; /* white */
+    --text-color: black;    /* black */
+    --main-hover-color: rgb(84, 194, 88);
+
+    --button-border-radius: 10px;
+}
+
+/* HTML table styling for the user delete page */
+#user-table {
+    width: 100%;
+    color: var(--text-color); 
+    background-color: var(--secondary-color);
+    border: 1px solid rgba(0,0,0,0.25);
+    border-collapse: collapse;
+}
+
+#user-table th {
+    font-size: 24px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: sticky; 
+    top: 0;
+    background-color: var(--secondary-color);
+}
+
+#user-table td {
+    border: 1px solid rgba(0,0,0,0.25);
+    border-collapse: collapse;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#table-container {
+    max-height: 70vh;
+    overflow-y: scroll;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* HTML table styling for the delete model page */
+#model-table {
+    width: 100%;
+    color: var(--text-color); 
+    background-color: var(--secondary-color);
+    border: 1px solid rgba(0,0,0,0.25);
+    border-collapse: collapse;
+}
+
+#model-table th {
+    font-size: 24px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: sticky; 
+    top: 0;
+    background-color: var(--secondary-color);
+}
+
+#model-table td {
+    border: 1px solid rgba(0,0,0,0.25);
+    border-collapse: collapse;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.container-background {
+    /*
+      Styling for the content inside containers
+    */
+    display: block;
+    min-width: 80vw;
+    max-height: 100vh;
+    padding: 10px;
+    flex-direction: column;
+    background: #e9ecef;
+  }
+
+/* Arrow indicators that change for the HTML tables */
+.arrow {
+    position: relative;
+    cursor: pointer;
+}
+
+.arrow::after {
+    font-family: FontAwesome;
+    content: "\f0dc";
+    position: absolute;
+    right: 8px;
+    color: #999;
+}
+
+.arrow.asc::after {
+    content: "\f0d8";
+}
+  
+.arrow.desc::after {
+    content: "\f0d7";
+}
+
+.arrow:hover::after {
+    color: #333;
+}
+  
+/* [Mobile] - Screen size less than 576px */
+@media screen and (max-width: 576px) {
+}

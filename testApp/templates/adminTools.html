@@ -1,0 +1,47 @@
+{% extends 'indexLogged.html' %}
+{% load static %}
+
+{% block adminTools %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Admin Tools</li>
+    </ol>
+</nav>
+<div class="list-group">
+    <a href="/testApp/add_model" class="list-group-item list-group-item-action">
+        Add Model
+    </a>
+    <a href="/testApp/adminDeleteUser" class="list-group-item list-group-item-action">
+        Delete User
+    </a>
+    <a href="/testApp/adminDeleteModel" class="list-group-item list-group-item-action">
+        Delete Teacher Pathway Model
+	</a>
+	<a href="/testApp/adminEditModel" class="list-group-item list-group-item-action">
+        Edit Pre-existing Model
+	</a>
+</div>
+
+<!-- Help popup -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<p>These are the admin tools that an admin can use.</p>
+            <p>- Add Model adds a new pathway model into the website.</p>
+            <p>- Delete User deletes the specified user and all the pathways that they have completed.</p>
+            <p>- Delete Teacher Pathway Model deletes a pathway model from the entire website.</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+		</div>
+	  </div>
+	</div>
+</div>
+{% endblock %}

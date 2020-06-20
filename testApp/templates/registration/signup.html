@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+ 
+{% block signup %}
+<div class="center-content">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <form method="post" class="signup-form">
+      {% csrf_token %}
+      <div class="input-fields">
+      {% for field in form %}
+          {{ field.label_tag }}
+          {{ field }}
+          {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      {% endfor %}
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg" id="sign-up-button" >Create Account</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+# do not track settings.py, as it includes settings for using a local database
+/seniorProj/settings.py
+*.log
+*.pot
+*.pyc
+__pycache__
+__pycache__/
+db.sqlite3
+.DS_Store
+node_modules
+.vs
+.vscode
+.env

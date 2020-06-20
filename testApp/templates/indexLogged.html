@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" style="background-image: url('{% static 'images/bg-01.jpg' %}');">
+	<head>
+		<title>BioPath</title>
+		<meta charset="UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+		<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/moduleEdit.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/modelEdit.css' %}">
+		<!-- Load this CSS file after loading the bootstrap css file to override some CSS -->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-override.css' %}">
+
+	<!--===============================================================================================-->
+	</head>
+	<body>
+		<!-- Navigation bar for logged in users -->
+		<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+			<a class="navbar-brand" href="/testApp/modelChoice">
+				<div class="biopath-logo">
+					<img src="{% static 'images/BioPath3_square.png' %}" class="wrap-biopath-logo-top-bar d-inline-block align-top">
+					<span class="biopath-logo-text">BioPath</span>
+				</div>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="#" data-toggle="modal" data-target="#helpModal">Help</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<div class="nav-link active">User: {{ user.get_username }}</div>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="{% url 'logout_view' %}">Log Out</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container-login100">
+			{% block modelChoice %}
+			{% endblock %}
+
+			{% block studentModels %}
+			{% endblock %}
+
+			{% block teacherModels %}
+			{% endblock %}
+
+			{% block adminTools %}
+			{% endblock %}
+
+			
+			{% block adminEditModel %}
+			{% endblock %}
+
+			{% block moduleEdit %}
+			{% endblock %}
+
+			{% block modelEdit %}
+			{% endblock %}
+
+			{% block addModel %}
+			{% endblock %}
+
+			{% block adminDeleteUser %}
+			{% endblock %}
+
+			{% block adminDeleteModel %}
+			{% endblock %}
+		</div>
+
+		<!--===============================================================================================-->
+		<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+		<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+		<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'js/main.js' %}"></script>
+
+	</body>
+</html>

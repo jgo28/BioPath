@@ -1,0 +1,332 @@
+{% extends 'indexLogged.html' %}
+
+{% block moduleEdit %}
+{% load static %}
+
+<body>
+	<script>
+		//need to add in abbreviations
+		var modelID = {{ modelID }};
+
+		var myEnzymes = [];
+		{% for mod in modules %}
+		myEnzymes.push(['{{ mod.enzyme }}', '{{mod.reversible}}', '{{mod.id}}', '{{mod.modelID_id}}', '{{mod.enzymeAbbr}}', '{{mod.xCoor}}', '{{mod.yCoor}}']);
+		{% endfor %}
+
+		var mySubstrates = [];
+		{% for subs in substrates %}
+		mySubstrates.push(['{{subs.substrate}}', '{{subs.id}}', '{{subs.moduleID_id}}', '{{subs.abbr}}']);
+		{% endfor %}
+
+		var myProducts = [];
+		{% for prods in products %}
+		myProducts.push(['{{prods.product}}', '{{prods.id}}', '{{prods.moduleID_id}}', '{{prods.abbr}}']);
+		{% endfor %}
+
+		var allProds = [];
+
+		var randomProds = [];
+		var randomSubs = [];
+		var randomModules = [];
+
+		{% for prods in allprods %}
+		//randomProds.push(['{{prods.product}}', '{{prods.enzyme}}', '{{prods.abbr}}']);
+		allProds.push(['{{prods.product}}', '{{prods.enzyme}}', '{{prods.abbr}}']);
+		{% endfor %}
+
+		var allSubs = [];
+		{% for subs in allsubs %}
+		//randomSubs.push(['{{subs.substrate}}', '{{subs.enzyme}}', '{{subs.abbr}}']);
+		allSubs.push(['{{subs.substrate}}', '{{subs.enzyme}}', '{{subs.abbr}}']);
+		{% endfor %}
+
+		var allModules = [];
+		{% for mod in allmodules %}
+		//randomModules.push(['{{ mod.enzyme }}', '{{mod.reversible}}', '{{mod.enzymeAbbr}}', '{{mod.id}}', '{{mod.xCoor}}', '{{mod.yCoor}}']);
+		allModules.push(['{{ mod.enzyme }}', '{{mod.reversible}}', '{{mod.enzymeAbbr}}', '{{mod.id}}', '{{mod.xCoor}}', '{{mod.yCoor}}']);
+		{% endfor %}
+
+		/*Added .sort() to each function call to alphabetize the lists*/
+		randomModules = allModules.slice().sort();
+		randomSubs = allSubs.slice().sort();
+		randomProds = allProds.slice().sort();
+
+		var myXCoor = '{{xCoor}}';
+		var myYCoor = '{{yCoor}}';
+
+		var moduleID = '{{moduleID}}';
+
+		var isPublic = false;
+		isPublic = '{{isPublic}}';
+
+		/* Removed this section to alphabetize the subs/enzys/products in the checkboxes */
+		/*
+		randomModules = shuffle(randomModules);
+		randomSubs = shuffle(randomSubs);
+		randomProds = shuffle(randomProds);
+		*/
+
+		function shuffle(a) {
+			var j, x, i;
+			for (i = a.length - 1; i > 0; i--) {
+				j = Math.floor(Math.random() * (i + 1));
+				x = a[i];
+				a[i] = a[j];
+				a[j] = x;
+			}
+			return a;
+		}
+
+	</script>
+	<img class="step1Image" id="Glucose" src="{% static 'images/Glucose.jpg' %}" style="display: none;">
+	<img class="step1Image" id="Glucose-6-Phosphate" src="{% static 'images/Glucose-6-Phosphate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="Fructose-6-Phosphate" src="{% static 'images/Fructose-6-Phosphate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="Fructose-1,6-bisphosphate" src="{% static 'images/Fructose-1,6-bisphosphate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="Dihydroxyacetone Phosphate" src="{% static 'images/Dihydroxyacetone Phosphate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="Glyceraldehyde-3-Phosphate" src="{% static 'images/Glyceraldehyde-3-Phosphate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="1,3-bisphoglycerate" src="{% static 'images/1,3-bisphoglycerate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="3 phosphoglycerate" src="{% static 'images/3 phosphoglycerate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="2 phosphoglycerate" src="{% static 'images/2 phosphoglycerate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="Phosphoenolpyruvate" src="{% static 'images/Phosphoenolpyruvate.jpg' %}"
+		style="display: none;">
+	<img class="step1Image" id="Pyruvate" src="{% static 'images/Pyruvate.jpg' %}" style="display: none;">
+	<!-- Button to activate options sidebar-->
+	<div id="open-sidebar">
+		<button class="openbtn" onclick="openNav()">&#9776; Options</button>
+	</div>
+	<div class="viewAndCreateReaction">
+		<div class="web-title-spacer"></div>
+		<div class="imageCanvasDiv">
+			<canvas id="imageCanvas" height="655" width="900"></canvas>
+		</div>
+		<!-- Options sidebar -->
+		<div style="display:inline-block;vertical-align: top;">
+			<div id="mySidebar" class="sidebar">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+				<div class="flex-sliders" id="slider-holder">
+					<div class="formdiv">
+						<form method="post" class="saveModuleForm" action="#">
+							{% csrf_token %}
+							<button type="button" class="collapsible-button" onclick="collapsibleSignifier('collapsible-signifier-substrate')">SUBSTRATES
+								<div id="collapsible-signifier-substrate">+</div>
+							</button>
+							<div class="collapsible-content">
+								<div id="subsContainer">
+									<ul class="subs" id="substrates">
+										<!-- dynamically create substrates checkboxes and labels -->
+										<script type="text/javascript">
+											//look for element by id, don't add if not null.
+
+											for (var i = 0; i < randomSubs.length; i++) {
+												String.prototype.replaceAll = function (search, replacement) {
+													var target = this;
+													return target.split(search).join(replacement);
+												};
+												var str1 = allSubs[i][0];
+												var str = randomSubs[i][0];
+												var newStr1 = str1.replaceAll(/_/, ' ');
+												var newStr = str.replaceAll(/_/, ' ');
+												var enzymeStr1 = allSubs[i][1];
+												var enzymeStr = randomSubs[i][1];
+												var newEnz1 = enzymeStr1.replaceAll(/_/, ' ');
+												var newEnz = enzymeStr.replaceAll(/_/, ' ');
+												randomSubs[i][1] = newEnz;
+												randomSubs[i][0] = newStr;
+												allSubs[i][1] = newEnz1
+												allSubs[i][0] = newStr1;
+												if (document.getElementById(randomSubs[i][0] + "SubId") === null) {
+													var newlabel = document.createElement("Label");
+													// newlabel.innerHTML = newStr;
+													newlabel.className = "container";
+													newlabel.setAttribute("id", randomSubs[i][0] + "SubId");
+													var newcheckbox = document.createElement("input");
+													newcheckbox.setAttribute("type", "checkbox");
+													newcheckbox.setAttribute("value", newStr);
+													newcheckbox.setAttribute("onchange", "onRadioChange()");
+													newcheckbox.setAttribute("name", "Substrate");
+													newcheckbox.className = randomSubs[i][2];
+													newlabel.appendChild(newcheckbox);
+													newlabel.appendChild(document.createTextNode(newStr));
+													document.getElementById("substrates").appendChild(newlabel);
+												}
+											}
+										</script>
+									</ul>
+								</div>
+							</div>
+
+							<button type="button" class="collapsible-button" onclick="collapsibleSignifier('collapsible-signifier-enzyme')">ENZYMES
+								<div id="collapsible-signifier-enzyme">+</div>
+							</button>
+							<div class="collapsible-content">
+								<div id="enzsContainer">
+									<ul class="enzs" id="enzymes">
+										<script type="text/javascript">
+											//look for element by id, don't add if not null.
+											for (var i = 0; i < randomModules.length; i++) {
+												String.prototype.replaceAll = function (search, replacement) {
+													var target = this;
+													return target.split(search).join(replacement);
+												};
+												var str1 = allModules[i][0];
+												var str = randomModules[i][0];
+												var newStr1 = str1.replaceAll(/_/, ' ');
+												var newStr = str.replaceAll(/_/, ' ');
+												allModules[i][0] = newStr1;
+												randomModules[i][0] = newStr;
+												if (document.getElementById(randomModules[i][0] + "EnzId") === null) {
+													var newlabel = document.createElement("Label");
+													newlabel.className = "container";
+													newlabel.setAttribute("id", randomModules[i][0] + "EnzId");
+													var newcheckbox = document.createElement("input");
+													newcheckbox.setAttribute("type", "radio");
+													newcheckbox.setAttribute("value", newStr);
+													newcheckbox.setAttribute("onchange", "onRadioChange()");
+													newcheckbox.setAttribute("name", "Enzyme");
+													newcheckbox.className = "Enzyme";
+													newlabel.appendChild(newcheckbox);
+													newlabel.appendChild(document.createTextNode(newStr));
+													document.getElementById("enzymes").appendChild(newlabel);
+												}
+											}
+										</script>
+									</ul>
+								</div>
+							</div>
+							<button type="button" class="collapsible-button" onclick="collapsibleSignifier('collapsible-signifier-product')">PRODUCTS
+								<div id="collapsible-signifier-product">+</div>
+							</button>
+							
+							<div class="collapsible-content">
+								<div id="prodsContainer">
+									<ul class="prods" id="products">
+										<script type="text/javascript">
+											//look for element by id, don't add if not null.
+											for (var j = 0; j < randomProds.length; j++) {
+												String.prototype.replaceAll = function (search, replacement) {
+													var target = this;
+													return target.split(search).join(replacement);
+												};
+												var str1 = allProds[j][0];
+												var str = randomProds[j][0];
+												var newStr1 = str1.replaceAll(/_/, ' ');
+												var newStr = str.replaceAll(/_/, ' ');
+												allProds[j][0] = newStr1;
+												randomProds[j][0] = newStr;
+												var enzymeStr1 = allProds[j][1];
+												var enzymeStr = randomProds[j][1];
+												var newEnz = enzymeStr.replaceAll(/_/, ' ');
+												var newEnz1 = enzymeStr1.replaceAll(/_/, ' ');
+												allProds[j][1] = newEnz1;
+												randomProds[j][1] = newEnz;
+												if (document.getElementById(randomProds[j][0] + "ProdId") === null) {
+													var newlabel = document.createElement("Label");
+													newlabel.className = "container";
+													newlabel.setAttribute("id", randomProds[j][0] + "ProdId");
+													var newcheckbox = document.createElement("input");
+													newcheckbox.setAttribute("type", "checkbox");
+													newcheckbox.setAttribute("value", newStr);
+													newcheckbox.setAttribute("onchange", "onRadioChange()");
+													newcheckbox.setAttribute("name", "Product");
+													newcheckbox.className = randomProds[j][2];
+													newlabel.appendChild(newcheckbox);
+													newlabel.appendChild(document.createTextNode(newStr));
+													document.getElementById("products").appendChild(newlabel);
+												}
+											}
+										</script>
+									</ul>
+								</div>
+							</div>
+							<button type="submit" class="saveReaction" id="saveReaction">SAVE REACTION</button>
+							<button type="button" class="createReaction" id="createReaction" onclick="closeNav()">CREATE REACTION</button>
+							<button type="button" class="clearReaction" id="clearReaction">CLEAR REACTION</button>
+							<div id="reversibleButtons">
+								<label id="reversibleButton" class="reversibleChoice">Reversible
+									<input type="radio" name="reversibleChoice" onchange="onRadioReverseChange()"
+										value="Reversible">
+									<span class="checkmark"></span>
+								</label>
+								<label id='irreversibleButton' class="reversibleChoice">Irreversible
+									<input type="radio" name="reversibleChoice" onchange="onRadioReverseChange()"
+										value="Irreversible" checked>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</form>
+					</div>
+					<button type="button" id="backBtn" class="backBtn">BACK</button>
+				</div>
+			</div>
+		</div>
+		<div class="web-title-spacer"></div>
+	</div>
+	<!-- The Modal -->
+	<div id="invalidModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p style="color: rebeccapurple">You must select at least one substrate, enzyme and product, as well as no more than five products or
+				substrates.</p>
+		</div>
+	</div>
+	<div id="invalidCheckModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p style="color: rebeccapurple">Sorry! We cannot fill in the reaction for your chosen enzyme at the moment.</p>
+		</div>
+	</div>
+	<div id="snackbar">This is a valid reaction, but not the next reaction in the pathway.</div>
+	<div id="snackbarHelp">If you get stumped, select only the enzyme, hit "create reaction" and we'll fill in the rest
+	</div>
+	<div id="snackbarSaveBtn">You must create the valid reaction before saving.</div>
+
+	<!-- Help popup -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <p>On this screen, you can create the reactions in this pathway!</p>
+                <br>
+                <p>- Create a reaction by selecting your products, substrates, enzymes, and reversible choice, and clicking
+					"CREATE REACTION".</p>
+                <p>- For the reaction to be correct you must correctly select the products, substrates, and enzyme. Don't
+					forget to set the reaction to reversible or irreversible.</p>
+				<br>
+                <p>- If the reaction is blue, that means the reaction is a correct reaction, but not the one we're looking for.</p>
+                <p>- If the reaction is green, it is correct and you have found the reaction we're looking for!</p>
+				<p>- If the reaction is red, it is incorrect and try again.</p>
+				<br>
+				<p><b>HINT:</b> If you get stumped, hit the "CLEAR REACTION" button, select your enzyme, and hit "CREATE
+					REACTION".</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+    </div>
+	<script src="{% static 'js/moduleEdit.js' %}"></script>
+	<script src="{% static 'js/utilities.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

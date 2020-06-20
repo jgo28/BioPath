@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "babel-jest": "^23.6.0",
+    "canvas": "^2.2.0",
+    "jest-canvas-mock": "^1.1.0",
+    "tape": "^4.9.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  }
+}

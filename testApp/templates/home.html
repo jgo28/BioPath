@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block home %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+  <div class="home-body">
+    <div class="container home-header">
+      <div class="row">
+        <div class="col">
+          <img src="{% static 'images/logo.png' %}" class="home-logo">
+        </div>
+        <div class="col-8">
+          <h1 id="app-name">BioPath</h1>
+          <h2 id="app-desc">A Biochemistry Pathway Creation Tool</h2>
+        </div>
+      </div>
+    </div>
+    <div id="biopath-description">
+      <h2 class="description-header">What is BioPath?</h2>
+      <span class="description">
+        BioPath is a way for students to learn about biochemistry pathways. We allow you to build, view, and learn
+        about pathways through interactive visualizations. All of this can be done through using our web application.
+      </span>
+    </div>
+    <div id="features-description">
+      <h2 class="description-header">Features:</h2>
+      <span class="description">
+        - Create your own biochemical pathways with the pathway creation tool in a step by step process. <br>
+        - Watch your pathway come to life after it is built with a flow represented by molecules moving through the reactions in the pathway. <br>
+        - Modify the speed of the molecule by changing the enzyme reaction rate. <br>
+      </span>
+    </div>
+  </div>
+{% endblock %}

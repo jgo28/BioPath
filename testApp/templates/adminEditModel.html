@@ -1,0 +1,36 @@
+{% extends 'indexLogged.html' %}
+{% load static %}
+
+{% block adminEditModel %}
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <!--===============================================================================================-->
+    
+    <div class="container-background">
+        <form method ="post" class="deleteUserForm">
+            {% csrf_token %}
+            <!-- Display users in an HTML table -->
+            <div id="table-container">
+                <table id="model-table">
+                    <tr>
+                        <th>Models: {{ modelList|length }}</th>
+                    </tr>
+                    {% for model in modelList %}
+                        <tr> 
+                            <td>
+                                <label class="container" id="{{model.modelName}}">
+                                    <input type="radio" value="{{model.modelName}}" name="Model" class="radioButton" className="{{model.modelName}}">
+                                        {{model.modelName}}
+                                    </input>     
+                                </label>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <input id="model_name_input", style="display:none">
+            <button type="submit" id="ModelName" class="login100-form-btn" id="sign-up-button" onclick="getSelectedModel()">Edit Model</button>
+        </form>
+    </div>
+    <script src="{% static 'js/adminEditModel.js' %}"></script>
+{% endblock %}
